@@ -96,7 +96,7 @@ public class Cart implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cart")
-	@Cascade(CascadeType.SAVE_UPDATE)
+	@Cascade(CascadeType.ALL)
 	public List<LineItem> getLinesItems() {
 		return this.linesItems;
 	}

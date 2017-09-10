@@ -32,6 +32,7 @@ public class SalesEngine {
 		BigDecimal totalTax =BigDecimal.ZERO;
 		BigDecimal totalAmount =BigDecimal.ZERO;
 		
+		
 		for(LineItem item : cart.getLinesItems()) {
 			totalAmount = totalAmount.add(item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
 			for(TaxPolicy taxPolicy : salesPolicy.getTaxPolicies()) {
@@ -42,6 +43,7 @@ public class SalesEngine {
 		}
 		cart.setTax(totalTax);
 		cart.setTotal(totalAmount.add(totalTax));
+		cart.setSubtotal(totalAmount);
 		return cart;
 	}
 	
