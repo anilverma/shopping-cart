@@ -1,6 +1,5 @@
 package com.shopping.cart.app.service;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +13,9 @@ import com.shopping.cart.app.exception.ProductNotFoundException;
 import com.shopping.cart.app.model.Cart;
 import com.shopping.cart.app.model.LineItem;
 import com.shopping.cart.app.model.Order;
-import com.shopping.cart.app.model.Product;
 import com.shopping.cart.app.model.Order.BuilderOrder;
-import com.shopping.cart.app.sales.ItemCategoryATaxPolicy;
+import com.shopping.cart.app.model.Product;
 import com.shopping.cart.app.sales.SalesEngine;
-import com.shopping.cart.app.sales.SalesPolicy;
-import com.shopping.cart.app.sales.TaxCalculator;
 import com.shopping.cart.app.util.OrderStatus;
 
 @Service

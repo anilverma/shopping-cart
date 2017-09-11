@@ -10,9 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shopping.cart.app.dao.CustomerDao;
-import com.shopping.cart.app.exception.AuthenticationFailedException;
 import com.shopping.cart.app.model.Customer;
-import com.shopping.cart.app.util.ShaHashing;
+
 
 @Service
 @Transactional
@@ -24,15 +23,7 @@ public class CustomerServiceImp implements CustomerService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	@Override
-	public Customer authentication(String username, String password) 
-			throws NoSuchAlgorithmException, AuthenticationFailedException {
-		Customer customer = customerDao.findBy(username);
-		if(customer.getPassword().equals(ShaHashing.encrypted(password)))
-			return customer;
-		else
-			throw new AuthenticationFailedException();
-	}
+	
 	
 	
 	@Override
