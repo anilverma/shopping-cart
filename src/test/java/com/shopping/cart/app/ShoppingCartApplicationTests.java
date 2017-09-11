@@ -1,4 +1,4 @@
-package com.shoppingCart.app;
+package com.shopping.cart.app;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,11 +24,12 @@ import org.springframework.web.context.WebApplicationContext;
 import com.shopping.cart.app.ShoppingCartApplication;
 import com.shopping.cart.app.config.HibernateConfig;
 import com.shopping.cart.app.model.Customer;
+import com.shopping.cart.app.model.Role;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 
 @SpringApplicationConfiguration(classes = {ShoppingCartApplication.class,HibernateConfig.class})
-@Transactional(transactionManager="txMgr")
+@Transactional
 @WebAppConfiguration
 public class ShoppingCartApplicationTests {
 
@@ -48,23 +49,22 @@ public class ShoppingCartApplicationTests {
 		mockMvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .build();
-		customer.setFirstName("user3");
-		customer.setLastName("user3");
-		customer.setUsername("user3");
-		customer.setPassword("user3");
+		customer.setFirstName("user");
+		customer.setLastName("user");
+		customer.setUsername("user");
+		customer.setPassword("user");
+		customer.setRole(Role.ROLE_USER);
 	}
 	
 	@Test
-	public void addCustomer() {	
-		try {
+	public void addCustomer() throws Exception {	
+		
 			String customerJson = json(customer);
 			this.mockMvc.perform(post("/users")
 			            .contentType(contentType)
 			            .content(customerJson))
 			            .andExpect(status().isCreated());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	protected String json(Object o) throws IOException {
