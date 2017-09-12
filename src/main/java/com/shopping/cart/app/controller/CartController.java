@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shopping.cart.app.exception.CartNotFoundException;
 import com.shopping.cart.app.exception.ProductNotFoundException;
 import com.shopping.cart.app.model.Cart;
 import com.shopping.cart.app.model.Order;
@@ -40,14 +41,14 @@ public class CartController {
 	@RequestMapping(value = "/users/{idUser}/carts/{idCart}", method = RequestMethod.PUT)
 	public @ResponseBody ResponseEntity<Void> addProduct(@PathVariable("idCart") Long idCart,
 			@PathVariable("idUser") Long idUser, @RequestParam("idProduct") Long idProduct,
-			@RequestParam("quantity") Integer quantity) {
+			@RequestParam("quantity") Integer quantity) throws CartNotFoundException, ProductNotFoundException {
 		cartService.add(idUser, idCart, idProduct, quantity);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/users/{idUser}/carts/{idCart}", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<Order> ordered(@PathVariable("idUser") Long idUser,
-			@PathVariable("idCart") Long idCart, HttpServletRequest request) throws URISyntaxException {
+			@PathVariable("idCart") Long idCart, HttpServletRequest request) throws URISyntaxException, CartNotFoundException {
 		Order order = cartService.ordered(idCart, idUser);
 		HttpHeaders header = new HttpHeaders();
 		header.setLocation(new URI(request.getRequestURL() + "/" + order.getIdorder().toString()));

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.shopping.cart.app.dao.CartDao;
 import com.shopping.cart.app.dao.OrderDao;
 import com.shopping.cart.app.dao.ProductDao;
+import com.shopping.cart.app.exception.CartNotFoundException;
 import com.shopping.cart.app.exception.ProductNotFoundException;
 import com.shopping.cart.app.model.Cart;
 import com.shopping.cart.app.model.LineItem;
@@ -50,21 +51,29 @@ public class CartServiceImp implements CartService {
 	}
 
 	@Override
-	public void add(Long idUser, Long idCart, Long idProduct, Integer quantity) {
+	public void add(Long idUser, Long idCart, Long idProduct, Integer quantity) throws CartNotFoundException, ProductNotFoundException {
 		Cart cart = cartDao.findBy(idCart, idUser);
+		if(cart==null) {
+			throw new CartNotFoundException();
+		}
 		Product product = productDao.findBy(idProduct);
 		if(product !=null) {
 			cart.getLinesItems().add(new LineItem(cart, product, quantity, product.getPrice()));
 			updateCartWithTax(cart);
 			cartDao.update(cart);
+		}else {
+			throw new ProductNotFoundException();
 		}
+		
 		
 	}
 
 	@Override
-	public Order ordered(Long idCart,Long idUser) {
+	public Order ordered(Long idCart,Long idUser) throws CartNotFoundException {
 		Cart cart = cartDao.findBy(idCart,idUser);
-		
+		if(cart==null) {
+			throw new CartNotFoundException();
+		}
 		Order order = new BuilderOrder().setCustomer(cart.getCustomer()).setOrdered(new Date())
 				.setStatus(OrderStatus.NEW.toString()).setTotal(cart.getTotal()).setTax(cart.getTax())
 				.setLinesItems(cart.getLinesItems()).build();

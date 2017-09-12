@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.shopping.cart.app.ShoppingCartApplication;
 import com.shopping.cart.app.config.HibernateConfig;
 import com.shopping.cart.app.model.Customer;
 import com.shopping.cart.app.model.Role;
@@ -31,7 +30,7 @@ import com.shopping.cart.app.model.Role;
 @SpringApplicationConfiguration(classes = {ShoppingCartApplication.class,HibernateConfig.class})
 @Transactional
 @WebAppConfiguration
-public class ShoppingCartApplicationTests {
+public class CustomerTests {
 
 	private	Customer customer = new Customer();	
 	@Autowired
@@ -49,11 +48,11 @@ public class ShoppingCartApplicationTests {
 		mockMvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .build();
-		customer.setFirstName("user");
-		customer.setLastName("user");
-		customer.setUsername("user");
-		customer.setPassword("user");
-		customer.setRole(Role.ROLE_USER);
+		customer.setFirstName("admin1");
+		customer.setLastName("admin1");
+		customer.setUsername("admin1");
+		customer.setPassword("admin1");
+		customer.setRole(Role.ROLE_ADMIN);
 	}
 	
 	@Test
