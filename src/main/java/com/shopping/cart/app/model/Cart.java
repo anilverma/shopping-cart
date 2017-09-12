@@ -60,7 +60,7 @@ public class Cart implements java.io.Serializable {
 	}
 
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idcustomer", nullable = false)
 	public Customer getCustomer() {
 		return this.customer;
@@ -97,7 +97,7 @@ public class Cart implements java.io.Serializable {
 		this.subtotal = subtotal;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "cart")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cart")
 	@Cascade(CascadeType.ALL)
 	public List<LineItem> getLinesItems() {
 		return this.linesItems;

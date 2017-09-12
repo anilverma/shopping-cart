@@ -62,7 +62,7 @@ public class Order implements java.io.Serializable {
 	}
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idcustomer", nullable = false)
 	public Customer getCustomer() {
 		return this.customer;
@@ -111,7 +111,7 @@ public class Order implements java.io.Serializable {
 	}
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
 	@Cascade(CascadeType.ALL)
 	public List<LineItem> getLinesItems() {
 		return this.linesItems;
