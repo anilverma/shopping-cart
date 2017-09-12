@@ -17,6 +17,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -63,6 +64,7 @@ public class ProductTests {
 	}
 	
 	@Test
+	@Rollback(false)
 	public void createProductUnAuthorisedAcesss() throws Exception {	
 		
 		String productJson = json(product);
@@ -74,6 +76,7 @@ public class ProductTests {
 	}
 	
 	@Test
+	@Rollback(false)
 	@WithUserDetails("admin")
 	public void createProduct() throws Exception {	
 		String productJson = json(product);

@@ -36,7 +36,6 @@ public class LineItem implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "idlines_item", unique = true, nullable = false)
 	public Long getIdlinesItem() {
 		return this.idlinesItem;

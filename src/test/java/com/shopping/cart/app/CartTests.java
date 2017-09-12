@@ -22,7 +22,9 @@ import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -83,6 +85,7 @@ public class CartTests {
 	
 	@Test
 	@WithUserDetails("user")
+	@Rollback(false)
 	public void createCart() throws Exception {	
 		customer = customerDao.findBy("user");
 		Cart cart = new Cart();
@@ -97,6 +100,7 @@ public class CartTests {
 	
 	@Test
 	@WithUserDetails("user")
+	@Rollback(false)
 	public void updateCart() throws Exception {	
 		customer = customerDao.findBy("user");
 		
@@ -117,6 +121,7 @@ public class CartTests {
 	
 	@Test
 	@WithUserDetails("user")
+	@Rollback(false)
 	public void createOrder() throws Exception {	
 		customer = customerDao.findBy("user");
 		
