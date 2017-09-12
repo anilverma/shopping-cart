@@ -46,7 +46,7 @@ public class LineItem implements java.io.Serializable {
 		this.idlinesItem = idlinesItem;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idcart", nullable = false)
 	public Cart getCart() {
 		return this.cart;
@@ -56,7 +56,7 @@ public class LineItem implements java.io.Serializable {
 		this.cart = cart;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idproduct", nullable = false)
 	public Product getProduct() {
 		return this.product;
@@ -66,7 +66,7 @@ public class LineItem implements java.io.Serializable {
 		this.product = product;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idorder")
 	public Order getOrder() {
 		return this.order;

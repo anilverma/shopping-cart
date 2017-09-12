@@ -78,6 +78,7 @@ public class CartServiceImp implements CartService {
 				.setStatus(OrderStatus.NEW.toString()).setTotal(cart.getTotal()).setTax(cart.getTax())
 				.setLinesItems(cart.getLinesItems()).build();
 		 orderDao.save(order);
+		 
 		 return order;
 	}
 
